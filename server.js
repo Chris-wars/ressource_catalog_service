@@ -7,7 +7,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
 
-
+// Ressourcen-Router importieren (alle /resources-Routen sind ausgelagert)
+import resourcesRouter from './routes/resources.js';
 
 // Express-App initialisieren
 const app = express();
@@ -30,10 +31,6 @@ app.use((req, res, next) => {
     next();
 });
 
-
-
-// Ressourcen-Router importieren (alle /resources-Routen sind ausgelagert)
-import resourcesRouter from './routes/resources.js';
 
 
 
