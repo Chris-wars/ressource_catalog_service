@@ -88,14 +88,14 @@ router.get('/', async (req, res, next) => {
  */
 router.post('/', async (req, res, next) => {
     try {
-        const { title, type, authorId, url } = req.body;
-        if (!title || !type || !authorId || !url) {
+        const { title, type, url, authorId } = req.body;
+        // authorId ist optional
+        if (!title || !type || !url) {
             return res.status(400).json({ error: 'Fehlende Felder.' });
         }
         const resources = await readResources();
-        // UUIDv4 für eindeutige ID verwenden
-        const newId = uuidv4();
-        const newResource = { id: newId, title, type, authorId, url };
+        const newResource = { id: uuidv4(), title, type, url };
+        if (authorId) newResource.authorId = authorId;
         resources.push(newResource);
         await writeResources(resources);
         res.status(201).json(newResource);
@@ -112,6 +112,7 @@ router.get('/:id', async (req, res, next) => {
     try {
         const resourceId = req.params.id;
         const resources = await readResources();
+        // IDs sind jetzt immer UUIDs (Strings), daher direkter Vergleich
         const resource = resources.find(r => r.id === resourceId);
         if (!resource) {
             return res.status(404).json({ error: 'Ressource nicht gefunden.' });
@@ -131,8 +132,9 @@ router.get('/:id', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
     try {
         const resourceId = req.params.id;
-        const { title, type, authorId, url } = req.body;
-        if (!title || !type || !authorId || !url) {
+        const { title, type, url, authorId } = req.body;
+        // authorId ist optional
+        if (!title || !type || !url) {
             return res.status(400).json({ error: 'Fehlende Felder.' });
         }
         const resources = await readResources();
@@ -140,7 +142,9 @@ router.put('/:id', async (req, res, next) => {
         if (idx === -1) {
             return res.status(404).json({ error: 'Ressource nicht gefunden.' });
         }
-        resources[idx] = { id: resourceId, title, type, authorId, url };
+        const updatedResource = { id: resourceId, title, type, url };
+        if (authorId) updatedResource.authorId = authorId;
+        resources[idx] = updatedResource;
         await writeResources(resources);
         res.json(resources[idx]);
     } catch (err) {
@@ -157,6 +161,7 @@ router.delete('/:id', async (req, res, next) => {
     try {
         const resourceId = req.params.id;
         const resources = await readResources();
+        // IDs sind UUIDs, direkter Vergleich
         const idx = resources.findIndex(r => r.id === resourceId);
         if (idx === -1) {
             return res.status(404).json({ error: 'Ressource nicht gefunden.' });
