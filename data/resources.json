@@ -12,12 +12,5 @@
         "type": "Video",
         "authorId": "a1b2c3d4",
         "url": "http://example.com/expressjs"
-    },
-    {
-        "id": "3",
-        "title": "Neuer Express-Server einrichten",
-        "type": "Blogpost",
-        "authorId": "d5e6f7g8",
-        "url": "http://example.com/neuer-server"
     }
 ]
