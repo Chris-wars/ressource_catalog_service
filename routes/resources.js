@@ -1,9 +1,11 @@
 
 // Express und Node.js-Module importieren
+
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { v4 as uuidv4 } from 'uuid';
 
 // Router-Instanz für alle /resources-Routen
 const router = express.Router();
@@ -90,8 +92,8 @@ router.post('/', async (req, res, next) => {
             return res.status(400).json({ error: 'Fehlende Felder.' });
         }
         const resources = await readResources();
-        // Neue ID generieren (höchste ID + 1)
-        const newId = (resources.length > 0 ? (Math.max(...resources.map(r => parseInt(r.id, 10))) + 1) : 1).toString();
+        // UUIDv4 für eindeutige ID verwenden
+        const newId = uuidv4();
         const newResource = { id: newId, title, type, authorId, url };
         resources.push(newResource);
         await writeResources(resources);

@@ -22,12 +22,10 @@
   "homepage": "https://github.com/Chris-wars/ressource_catalog_service#readme",
   "dependencies": {
     "dotenv": "^17.2.1",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
   }
 }
-
-
-
