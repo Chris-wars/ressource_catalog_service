@@ -4,5 +4,11 @@
         "resourceId": "1",
         "feedbackText": "Neuer Kommentartext",
         "timestamp": "2025-08-06T07:19:29.739Z"
+    },
+    {
+        "id": "04f8bf67-f3c3-4559-b56e-b4621ad26b50",
+        "resourceId": "40e05d02-074b-421d-bc5c-a58481557bcc",
+        "feedbackText": "Sehr hilfreiche Ressource!",
+        "timestamp": "2025-08-06T07:43:11.987Z"
     }
 ]
