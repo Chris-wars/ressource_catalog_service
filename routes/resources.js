@@ -59,7 +59,6 @@ function writeResources(resources) {
 // Hilfsfunktionen: Bewertungen (Ratings)
 // =====================
 
-
 // =====================
 // Hilfsfunktionen: Feedback
 // =====================
@@ -117,9 +116,7 @@ function validateFeedbackText(text) {
 }
 
 
-// =====================
-// Feedback-Endpunkte
-// =====================
+
 
 /**
  * POST /resources/:resourceId/feedback
@@ -266,6 +263,10 @@ function writeRatings(ratings) {
     });
 }
 
+// =====================
+// Rating-Endpunkte
+// =====================
+
 /**
  * POST /resources/:id/rating
  * Bewertet eine Ressource mit 1-5 Sternen (ratingValue).
@@ -331,7 +332,9 @@ router.delete('/:resourceId/rating/:ratingId', async (req, res, next) => {
     }
 });
 
-
+// =====================
+// Ressourcen Endpunkte
+// =====================
 
 /**
  * GET /resources/search
